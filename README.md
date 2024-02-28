@@ -1,1 +1,0 @@
-# boosty-app-backend

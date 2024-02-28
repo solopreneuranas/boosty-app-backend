@@ -1,0 +1,3 @@
+. Create 3 pages of Boosty (About, Contact, FAQ)
+. Create Process section at Home page of Boosty
+. Fix all the issues and logics in Croma

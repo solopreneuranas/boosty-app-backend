@@ -67,9 +67,17 @@ router.get('/display_all_companies', async function (req, res) {
                 foreignField: "_id",
                 as: "userData"
             }
+        },
+        {
+            $lookup: {
+                from: "orderstatuses",
+                localField: "userid",
+                foreignField: "userid",
+                as: "orderStatus"
+            }
         }
     ],
-        { $unwind: "$userData" }
+        { $unwind: "$userData", $unwind: "$orderStatus" }
     ).then((result) => {
         res.json({ status: true, data: result })
     }).catch((e) => {

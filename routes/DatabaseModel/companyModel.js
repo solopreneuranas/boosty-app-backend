@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 var companySchema = mongoose.Schema({
     userid: {
         type: mongoose.Schema.Types.ObjectId,
-        ref : "users",
+        ref: "users",
         required: true
     },
     companystate: {
@@ -48,7 +48,7 @@ var companySchema = mongoose.Schema({
     membersdata: {
         type: Array,
         required: false
-    },    
+    },
     legalfirstname: {
         type: String,
         required: true
@@ -114,6 +114,18 @@ var companySchema = mongoose.Schema({
         required: false
     },
     orderamount: {
+        type: String,
+        required: true
+    },
+    companyAmount: {
+        type: String,
+        required: true
+    },
+    addonsAmount: {
+        type: String,
+        required: false
+    },
+    selectedStateFee: {
         type: String,
         required: true
     },

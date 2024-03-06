@@ -27,6 +27,14 @@ router.post('/create-mail', upload.single('mail'), function (req, res) {
     }
 })
 
+router.get('/display_all_mails', async function (req, res) {
+    await Mailroom.find({}).then((result) => {
+        res.json({ status: true, data: result })
+    }).catch((e) => {
+        res.json({ status: false })
+    })
+})
+
 router.post('/display_all_mails_by_user', async function (req, res) {
     await Mailroom.aggregate([
         {

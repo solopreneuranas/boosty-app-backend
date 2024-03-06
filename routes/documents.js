@@ -35,29 +35,13 @@ router.post('/display_all_documents_by_user', async function (req, res) {
     })
 })
 
-// router.post('/display_all_documents_by_company', async function (req, res) {
-//     await Document.aggregate([
-//         {
-//             $lookup: {
-//                 from: "companies",
-//                 localField: "companyid",
-//                 foreignField: "_id",
-//                 as: "companyData"
-//             }
-//         },
-//         {
-//             $match: {
-//                 companyid: new mongoose.Types.ObjectId(req.body.companyid)
-//             }
-//         }
-//     ],
-//         { $unwind: "$companyData" }
-//     ).then((result) => {
-//         res.json({ status: true, data: result })
-//     }).catch((e) => {
-//         res.json({ msg: "Error", error: e })
-//     })
-// })
+router.get('/display_all_documents', async function (req, res) {
+    await Document.find({}).then((result) => {
+        res.json({ status: true, data: result })
+    }).catch((e) => {
+        res.json({ status: false })
+    })
+})
 
 router.post('/delete-document', async function (req, res) {
     await Document.deleteOne({ _id: req.body._id }).then((result) => {

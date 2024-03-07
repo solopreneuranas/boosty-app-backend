@@ -18,7 +18,6 @@ var adminRouter = require('./routes/admin')
 var documentRouter = require('./routes/documents')
 var mailroomRouter = require('./routes/mailroom')
 var orderStatusRouter = require('./routes/orderStatus')
-var graphRouter = require('./routes/graph')
 
 var app = express();
 
@@ -43,7 +42,6 @@ app.use('/admin', adminRouter)
 app.use('/document', documentRouter)
 app.use('/mailroom', mailroomRouter)
 app.use('/orderstatus', orderStatusRouter)
-app.use('/graph', graphRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

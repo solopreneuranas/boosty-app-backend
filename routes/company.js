@@ -8,8 +8,7 @@ const { default: mongoose } = require('mongoose');
 
 const getEmailContent = (data) => {
     return (
-        `Hello ${data?.useraccountname}, 
-        We have received your order of company formation in ${data?.companystate}.
+        `We have received your order of company formation in ${data?.companystate}.
         Soon your company ${data?.companyname} will be formed in ${data?.companystate}.`
     );
 }
@@ -26,22 +25,22 @@ router.post('/create-company', upload.single('userpassport'), function (req, res
                 const nodemailer = require("nodemailer");
 
                 const transporter = nodemailer.createTransport({
-                    host: "smtp.hostinger.com",
+                    host: "smtpout.secureserver.net ",
                     port: 465,
                     secure: true, // Use `true` for port 465, `false` for all other ports
                     auth: {
-                        user: "hello@bluenexus.co",
-                        pass: "@Nexus2024",
+                        user: "hello@tryboosty.com",
+                        pass: "@Boosty2024",
                     },
                 });
 
                 async function main() {
                     // send mail with defined transport object
                     const info = await transporter.sendMail({
-                        from: '"Anas K. " <hello@bluenexus.co>', // sender address
+                        from: '"Boosty LLC " <hello@tryboosty.com>', // sender address
                         to: `${req.body?.useraccountemail}`, // list of receivers
-                        subject: "Hello Anas ✔", // Subject line
-                        text: "Hello, this is a Test email?", // plain text body
+                        subject: "Order Received For Company Formation!", // Subject line
+                        text: `Hello, ${req.body?.useraccountname}`, // plain text body
                         html: getEmailContent(req.body), // html body
                     });
                     console.log("Message sent: %s", info.messageId);

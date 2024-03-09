@@ -10,7 +10,7 @@ router.post('/create-account', function (req, res) {
                 res.json({ status: true, message: 'User account created successfully!' });
             }
             else {
-                 console.log ("Hello")
+                console.log("Hello")
                 res.json({ status: false, message: 'Database Error!' });
             }
         })
@@ -48,5 +48,13 @@ router.get('/display_all_users', async function (req, res) {
     })
 })
 
+router.post('/delete_user', async function (req, res) {
+    await User.deleteOne({ _id: req.body._id }).then((result) => {
+        res.json({ status: true })
+    }).catch((e) => {
+        res.json({ status: false, message: 'Database Error' })
+        console.log(e)
+    })
+})
 
 module.exports = router;

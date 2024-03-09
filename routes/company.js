@@ -95,4 +95,13 @@ router.post('/update-company', async function (req, res, next) {
     })
 })
 
+router.post('/delete_company', async function (req, res) {
+    await Company.deleteOne({ _id: req.body._id }).then((result) => {
+        res.json({ status: true })
+    }).catch((e) => {
+        res.json({ status: false, message: 'Database Error' })
+        console.log(e)
+    })
+})
+
 module.exports = router;

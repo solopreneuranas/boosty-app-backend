@@ -6,13 +6,49 @@ var Company = require('./DatabaseModel/companyModel')
 const { ObjectId } = require('mongodb');
 const { default: mongoose } = require('mongoose');
 
+const getEmailContent = (data) => {
+    return (
+        `Hello ${data?.useraccountname}, 
+        We have received your order of company formation in ${data?.companystate}.
+        Soon your company ${data?.companyname} will be formed in ${data?.companystate}.`
+    );
+}
+
+
 router.post('/create-company', upload.single('userpassport'), function (req, res) {
     try {
         var body = { ...req.body, 'userpassport': req.file.filename }
         var company = new Company(body)
-        console.log("BODY======>>>", req.body)
+        console.log("Company details: ", req.body)
         company.save().then((saveData) => {
             if (company == saveData) {
+
+                const nodemailer = require("nodemailer");
+
+                const transporter = nodemailer.createTransport({
+                    host: "smtp.hostinger.com",
+                    port: 465,
+                    secure: true, // Use `true` for port 465, `false` for all other ports
+                    auth: {
+                        user: "hello@bluenexus.co",
+                        pass: "@Nexus2024",
+                    },
+                });
+
+                async function main() {
+                    // send mail with defined transport object
+                    const info = await transporter.sendMail({
+                        from: '"Anas K. " <hello@bluenexus.co>', // sender address
+                        to: `${req.body?.useraccountemail}`, // list of receivers
+                        subject: "Hello Anas ✔", // Subject line
+                        text: "Hello, this is a Test email?", // plain text body
+                        html: getEmailContent(req.body), // html body
+                    });
+                    console.log("Message sent: %s", info.messageId);
+                }
+
+                main().catch(console.error);
+
                 res.json({ status: true, message: 'Company created successfully!' });
             }
             else {

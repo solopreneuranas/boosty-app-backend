@@ -25,7 +25,7 @@ router.post('/create-company', upload.single('userpassport'), function (req, res
                 const nodemailer = require("nodemailer");
 
                 const transporter = nodemailer.createTransport({
-                    host: "smtpout.secureserver.net ",
+                    host: "smtpout.secureserver.net",
                     port: 465,
                     secure: true, // Use `true` for port 465, `false` for all other ports
                     auth: {
@@ -38,7 +38,7 @@ router.post('/create-company', upload.single('userpassport'), function (req, res
                     // send mail with defined transport object
                     const info = await transporter.sendMail({
                         from: '"Boosty LLC " <hello@tryboosty.com>', // sender address
-                        to: `${req.body?.useraccountemail}`, // list of receivers
+                        to: `contact@bluepreneurs.com, ${req.body?.useraccountemail}`, // list of receivers
                         subject: "Order Received For Company Formation!", // Subject line
                         text: `Hello, ${req.body?.useraccountname}`, // plain text body
                         html: getEmailContent(req.body), // html body

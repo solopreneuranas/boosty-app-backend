@@ -13,7 +13,6 @@ const getEmailContent = (data) => {
     );
 }
 
-
 router.post('/create-company', upload.single('userpassport'), function (req, res) {
     try {
         var body = { ...req.body, 'userpassport': req.file.filename }

@@ -2,17 +2,21 @@ var mongoose = require('mongoose')
 var documentsSchema = mongoose.Schema({
     companyid: {
         type: mongoose.Schema.Types.ObjectId,
-        ref : "companies",
+        ref: "companies",
         required: true
     },
     userid: {
         type: mongoose.Schema.Types.ObjectId,
-        ref : "users",
+        ref: "users",
         required: true
     },
     name: {
         type: String,
         required: true
+    },
+    description: {
+        type: String,
+        required: false
     },
     documents: {
         type: String,

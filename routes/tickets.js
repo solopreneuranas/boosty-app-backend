@@ -20,6 +20,14 @@ router.post('/create-tickets', function (req, res) {
     }
 })
 
+router.post('/display_all_tickets', async function (req, res) {
+    await Ticket.find({}).then((result) => {
+        res.json({ status: true, data: result })
+    }).catch((e) => {
+        res.json({ status: false })
+    })
+})
+
 router.post('/display_all_tickets_by_user', async function (req, res) {
     await Ticket.find({ 'userid': req.body.userid }).then((result) => {
         res.json({ status: true, data: result })
